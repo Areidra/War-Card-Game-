@@ -8,7 +8,7 @@ console.log(deckContainer);
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
 //renderDeckInContainer(masterDeck, deckContainer );
-
+let isGameRunning = false;
 /*----- app's state (variables) -----*/
 let shuffledDeck;
 
@@ -16,7 +16,9 @@ let shuffledDeck;
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', renderShuffledDeck);
+let button = document.getElementById('reset')
+console.log(button);
+button.addEventListener('click', renderDeckInContainer);
 
 /*----- functions -----*/
 function renderShuffledDeck() {
@@ -29,12 +31,13 @@ function renderShuffledDeck() {
     // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
-  renderDeckInContainer(shuffledDeck);
+  splitDeck(shuffledDeck)
+  renderDeckInContainer();
 }
 
-function renderDeckInContainer(deck) {
+function renderDeckInContainer() {
+    console.log('hitting render deck')
   deckContainer.innerHTML = '';
-  splitDeck(deck)
   console.log(player1Deck);
   let p1Card = player1Deck.pop()
   let p2Card = player2Deck.pop()
