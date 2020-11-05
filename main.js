@@ -7,7 +7,7 @@ let deckContainer = document.getElementById('master-deck-container')
 console.log(deckContainer);
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
-renderDeckInContainer(masterDeck, deckContainer );
+//renderDeckInContainer(masterDeck, deckContainer );
 
 /*----- app's state (variables) -----*/
 let shuffledDeck;
@@ -29,18 +29,26 @@ function renderShuffledDeck() {
     // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
-  renderDeckInContainer(shuffledDeck, shuffledContainer);
+  renderDeckInContainer(shuffledDeck);
 }
 
 function renderDeckInContainer(deck) {
   deckContainer.innerHTML = '';
   splitDeck(deck)
+  console.log(player1Deck);
   let p1Card = player1Deck.pop()
   let p2Card = player2Deck.pop()
   let p1 = document.getElementById('p1')
   let p2 = document.getElementById('p2')
   p1.innerHTML= `<div class="card ${p1Card.face}"></div>`
   p2.innerHTML= `<div class="card ${p2Card.face}"></div>`
+  if (p1Card.value > p2Card.value){
+      player1Deck.push(p1Card, p2Card)
+  } else {
+      player2Deck.push(p1Card, p2Card)
+  }
+  document.getElementById('p1Score').innerHTML = player1Deck.length
+  document.getElementById('p2Score').innerHTML = player2Deck.length
   // Let's build the cards as a string of HTML
   // Use reduce when you want to 'reduce' the array into a single thing - in this case a string of HTML markup 
 //   const cardsHtml = deck.reduce(function(html, card) {
