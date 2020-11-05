@@ -47,8 +47,10 @@ function renderDeckInContainer() {
   p2.innerHTML= `<div class="card ${p2Card.face}"></div>`
   if (p1Card.value > p2Card.value){
       player1Deck.push(p1Card, p2Card)
+      declareWinner()
   } else {
       player2Deck.push(p1Card, p2Card)
+      declareWinner()
   }
   document.getElementById('p1Score').innerHTML = player1Deck.length
   document.getElementById('p2Score').innerHTML = player2Deck.length
@@ -87,4 +89,12 @@ function splitDeck (deck){
             player2Deck.push(e)
         }
     })
+}
+
+function declareWinner (){
+    if (player1Deck >= 52){
+        console.log('player 1 wins')
+    } else if(player2Deck >= 52) {
+        console.log('player 2 wins')
+    }
 }
