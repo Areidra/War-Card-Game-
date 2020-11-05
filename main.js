@@ -18,11 +18,13 @@ let shuffledDeck;
 
 /*----- cached element references -----*/
 const shuffledContainer = document.getElementById('shuffled-deck-container');
+let newGame = document.getElementById('newGame')
 
 /*----- event listeners -----*/
 let button = document.getElementById('reset')
 console.log(button);
 button.addEventListener('click', renderDeckInContainer);
+newGame.addEventListener('click', reset)
 
 /*----- functions -----*/
 function renderShuffledDeck() {
@@ -107,9 +109,18 @@ function splitDeck(deck) {
 }
 
 function declareWinner() {
-  if (player1Deck >= 52) {
+  if (player1Deck.length >= 30) {
     console.log('player 1 wins')
-  } else if (player2Deck >= 52) {
+    document.querySelector('h1').textContent='Player 1 wins!'
+  } else if (player2Deck.length >= 30) {
     console.log('player 2 wins')
+    document.querySelector('h1').textContent='Player 2 wins!'
   }
+}
+
+function reset(){
+  player1Deck=[]
+  player2Deck=[]
+  renderShuffledDeck()
+  document.querySelector('h1').textContent='War!'
 }
